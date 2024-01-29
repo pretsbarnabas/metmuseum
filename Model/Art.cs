@@ -6,30 +6,6 @@ using System.Threading.Tasks;
 
 namespace museum_api.Model
 {
-    public class Constituent
-    {
-        public int constituentID { get; set; }
-        public string role { get; set; }
-        public string name { get; set; }
-        public string constituentULAN_URL { get; set; }
-        public string constituentWikidata_URL { get; set; }
-        public string gender { get; set; }
-    }
-
-    public class ElementMeasurements
-    {
-        public double Height { get; set; }
-        public double Width { get; set; }
-        public int? Depth { get; set; }
-    }
-
-    public class Measurement
-    {
-        public string elementName { get; set; }
-        public object elementDescription { get; set; }
-        public ElementMeasurements elementMeasurements { get; set; }
-    }
-
     public class Art
     {
         public int objectID { get; set; }
