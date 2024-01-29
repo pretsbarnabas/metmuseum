@@ -11,6 +11,11 @@
         <vm:MuseumVM x:Key="vm"/>
     </Window.Resources>
     <Grid DataContext="{StaticResource vm}">
-        <Button Width="100" Height="50" Content="Search" Command="{Binding SearchCommand}"></Button>
+        <StackPanel>
+            <TextBox Text="{Binding Query, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+            <Button Width="100" Height="50" Content="Search" Command="{Binding SearchCommand}"></Button>
+            <ListView ItemsSource="{Binding IdList}"></ListView>
+            <Image Source="{Binding SelectedArt.primaryImage}"/>
+        </StackPanel>
     </Grid>
 </Window>
