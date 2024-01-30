@@ -14,9 +14,9 @@ namespace museum_api.ViewModel.Helpers
     {
         public const string BASE_URL = "https://collectionapi.metmuseum.org/public/collection/v1/search";
         
-        public static async Task<List<int>> SearchArt(string query)
+        public static async Task<List<int>> SearchArt(string query, bool highlight)
         {
-            var url = $"{BASE_URL}?isHighlight=true&q={query}";
+            var url = $"{BASE_URL}?isHighlight={highlight.ToString().ToLower()}&q={query}";
             List<int> result = new();
             using(HttpClient client = new HttpClient())
             {

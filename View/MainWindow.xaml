@@ -11,14 +11,22 @@
         <vm:MuseumVM x:Key="vm"/>
     </Window.Resources>
     <Grid DataContext="{StaticResource vm}">
+        <WrapPanel>
         <StackPanel>
-            <TextBox Width="250" Text="{Binding Query, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
-            <Button Width="100" Height="50" Content="Search" Command="{Binding SearchCommand}"></Button>
-            <ListView Width="200" ItemsSource="{Binding IdList}" SelectedItem="{Binding SelectedItem}">
-            </ListView>
+            <TextBox Width="250" Text="{Binding Query, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <WrapPanel Width="250">
+                    <Button Width="100" Height="50" Content="Search" Command="{Binding SearchCommand}"/>
+                    <CheckBox IsChecked="{Binding CheckboxChecked}" IsEnabled="True" VerticalContentAlignment="Center" Margin="5" ></CheckBox>
+                </WrapPanel>
+            
             <!--<TextBlock MinWidth="0" Text="{Binding SelectedArt.objectName}"></TextBlock>-->
-            <Image Width="200" Source="{Binding SelectedArt.primaryImage}"/>
+            
             <TextBlock MinWidth="0" Width="300" Text="{Binding SelectedArt.title}"/>
         </StackPanel>
+        <WrapPanel>
+            <ListView MaxHeight="300" Width="200" ItemsSource="{Binding IdList}" SelectedItem="{Binding SelectedItem}"/>
+            <Image Width="200" Source="{Binding SelectedArt.primaryImage}"/>
+        </WrapPanel>
+        </WrapPanel>
     </Grid>
 </Window>

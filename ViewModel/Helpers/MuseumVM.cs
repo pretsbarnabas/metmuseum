@@ -27,7 +27,18 @@ namespace museum_api.ViewModel.Helpers
             }
         }
 
+        private bool checkboxChecked;
 
+        public bool CheckboxChecked
+        {
+            get { return checkboxChecked; }
+            set
+            {
+                checkboxChecked = value;
+                OnPropertyChanged(nameof(checkboxChecked));
+            }
+
+        }
         public Art SelectedArt
         {
             get { return selectedart; }
@@ -63,7 +74,7 @@ namespace museum_api.ViewModel.Helpers
         {
             if (string.IsNullOrWhiteSpace(Query)) return;
             IdList.Clear();
-            var result = await API_Helper.SearchArt(Query);
+            var result = await API_Helper.SearchArt(Query, CheckboxChecked);
             if(result != null)
             {
                 foreach (var item in result)
