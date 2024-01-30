@@ -12,10 +12,13 @@
     </Window.Resources>
     <Grid DataContext="{StaticResource vm}">
         <StackPanel>
-            <TextBox Text="{Binding Query, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+            <TextBox Width="250" Text="{Binding Query, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
             <Button Width="100" Height="50" Content="Search" Command="{Binding SearchCommand}"></Button>
-            <ListView ItemsSource="{Binding IdList}"></ListView>
-            <Image Source="{Binding SelectedArt.primaryImage}"/>
+            <ListView Width="200" ItemsSource="{Binding IdList}" SelectedItem="{Binding SelectedItem}">
+            </ListView>
+            <!--<TextBlock MinWidth="0" Text="{Binding SelectedArt.objectName}"></TextBlock>-->
+            <Image Width="200" Source="{Binding SelectedArt.primaryImage}"/>
+            <TextBlock MinWidth="0" Width="300" Text="{Binding SelectedArt.title}"/>
         </StackPanel>
     </Grid>
 </Window>

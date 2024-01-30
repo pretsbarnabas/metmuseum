@@ -14,7 +14,19 @@ namespace museum_api.ViewModel.Helpers
     {
         public event PropertyChangedEventHandler? PropertyChanged;
         public SearchCommand SearchCommand { get; set; }
-        private Art selectedart;    
+        private Art selectedart;
+        private int selectedItem;
+
+        public int SelectedItem
+        {
+            get { return selectedItem; }
+            set {
+                selectedItem = value;
+                OnPropertyChanged(nameof(SelectedItem));
+                GetArtInfo();
+            }
+        }
+
 
         public Art SelectedArt
         {
@@ -50,6 +62,7 @@ namespace museum_api.ViewModel.Helpers
         public async void MakeQuery()
         {
             if (string.IsNullOrWhiteSpace(Query)) return;
+            IdList.Clear();
             var result = await API_Helper.SearchArt(Query);
             if(result != null)
             {
@@ -63,7 +76,7 @@ namespace museum_api.ViewModel.Helpers
 
         private async void GetArtInfo()
         {
-            SelectedArt = await API_Helper.GetArtInfo(436535);
+            SelectedArt = await API_Helper.GetArtInfo(SelectedItem);
         }
         private void OnPropertyChanged(string v)
         {

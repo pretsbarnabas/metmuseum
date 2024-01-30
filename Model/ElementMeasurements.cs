@@ -10,6 +10,6 @@ namespace museum_api.Model
     {
         public double Height { get; set; }
         public double Width { get; set; }
-        public int? Depth { get; set; }
+        public double? Depth { get; set; }
     }
 }
