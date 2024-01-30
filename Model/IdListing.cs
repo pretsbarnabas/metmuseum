@@ -10,6 +10,6 @@ namespace museum_api.Model
     public class IdListing
     {
         public int total { get; set; }
-        public ObservableCollection<int> objectIDs { get; set; }
+        public IList<int> objectIDs { get; set; }
     }
 }

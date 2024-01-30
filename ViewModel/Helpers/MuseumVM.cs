@@ -43,6 +43,7 @@ namespace museum_api.ViewModel.Helpers
         public MuseumVM() 
         {
             SearchCommand = new SearchCommand(this);
+            IdList = new();
         }
 
 
@@ -50,7 +51,13 @@ namespace museum_api.ViewModel.Helpers
         {
             if (string.IsNullOrWhiteSpace(Query)) return;
             var result = await API_Helper.SearchArt(Query);
-            if(result != null) IdList = result;
+            if(result != null)
+            {
+                foreach (var item in result)
+                {
+                    IdList.Add(item);
+                }
+            }
             this.GetArtInfo();
         }
 
