@@ -1,4 +1,4 @@
-﻿<Window x:Class="museum_api.MainWindow"
+﻿<Window x:Class="museum_api.MainWindow" 
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -6,27 +6,45 @@
         xmlns:local="clr-namespace:museum_api"
         xmlns:vm="clr-namespace:museum_api.ViewModel.Helpers"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Metmuseum" Height="450" Width="800"
+        ResizeMode="CanMinimize">
     <Window.Resources>
         <vm:MuseumVM x:Key="vm"/>
+        
+        
+        
+        
     </Window.Resources>
     <Grid DataContext="{StaticResource vm}">
-        <WrapPanel>
+        <WrapPanel Margin="25">
         <StackPanel>
-            <TextBox Width="250" Text="{Binding Query, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <WrapPanel>
+                    <Label FontStyle="Oblique" FontWeight="Bold" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Center">Metmuseum</Label>
+                    <Label Foreground="Gray" VerticalAlignment="Bottom"> - böngéssz alkotások között!</Label>
+                </WrapPanel>
+                <TextBox Width="250" Text="{Binding Query, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                 <WrapPanel Width="250">
-                    <Button Width="100" Height="50" Content="Search" Command="{Binding SearchCommand}"/>
+                    <Button Margin="5" Width="100" Height="50" Content="Keresés" Command="{Binding SearchCommand}"/>
+                    <Label VerticalContentAlignment="Center">Kiemelt alkotások:</Label>
                     <CheckBox IsChecked="{Binding CheckboxChecked}" IsEnabled="True" VerticalContentAlignment="Center" Margin="5" ></CheckBox>
                 </WrapPanel>
+                <!--<TextBlock MinWidth="0" Text="{Binding SelectedArt.objectName}"></TextBlock>-->
+                
+                <ListView Margin="10" MaxHeight="300" Width="200" Height="200" ItemsSource="{Binding IdList}" SelectedItem="{Binding SelectedItem}"/>
+            </StackPanel>
             
-            <!--<TextBlock MinWidth="0" Text="{Binding SelectedArt.objectName}"></TextBlock>-->
-            
-            <TextBlock MinWidth="0" Width="300" Text="{Binding SelectedArt.title}"/>
-        </StackPanel>
-        <WrapPanel>
-            <ListView MaxHeight="300" Width="200" ItemsSource="{Binding IdList}" SelectedItem="{Binding SelectedItem}"/>
-            <Image Width="200" Source="{Binding SelectedArt.primaryImage}"/>
-        </WrapPanel>
+            <WrapPanel>
+                <Image Margin="10" Width="200" Source="{Binding SelectedArt.primaryImage}"/>
+                <StackPanel Margin="10">
+                    <TextBlock FontStyle="Oblique" FontWeight="Bold" FontSize="15" MinWidth="0" Width="auto" Text="{Binding SelectedArt.title}"/>
+                    <TextBlock FontStyle="Italic" MinWidth="0" Width="auto" Text="{Binding SelectedArt.artistDisplayName}"/>
+                    <TextBlock MinWidth="0" Width="auto" Text="{Binding SelectedArt.artistNationality}"/>
+                    <TextBlock MinWidth="0" Width="auto" Text="{Binding SelectedArt.objectDate}"/>
+                    
+                    <TextBlock MinWidth="0" Width="auto" Text="{Binding SelectedArt.objectDate}"/>
+                    
+                </StackPanel>
+            </WrapPanel>
         </WrapPanel>
     </Grid>
 </Window>
