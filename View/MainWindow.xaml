@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:museum_api"
         xmlns:vm="clr-namespace:museum_api.ViewModel.Helpers"
         mc:Ignorable="d"
-        Title="Metmuseum" Height="450" Width="800"
+        Title="Metmuseum" Height="450" Width="850"
         ResizeMode="CanMinimize">
     <Window.Resources>
         <vm:MuseumVM x:Key="vm"/>
@@ -33,16 +33,14 @@
                 <ListView Margin="10" MaxHeight="300" Width="200" Height="200" ItemsSource="{Binding IdList}" SelectedItem="{Binding SelectedItem}"/>
             </StackPanel>
             
-            <WrapPanel>
-                <Image Margin="10" Width="200" Source="{Binding SelectedArt.primaryImage}"/>
-                <StackPanel Margin="10">
+            <WrapPanel Width="auto" MaxWidth="490">
+                <Image Margin="10" Width="150" Source="{Binding SelectedArt.primaryImage}"/>
+                <StackPanel Width="auto" Margin="10">
                     <TextBlock FontStyle="Oblique" FontWeight="Bold" FontSize="15" MinWidth="0" Width="auto" Text="{Binding SelectedArt.title}"/>
                     <TextBlock FontStyle="Italic" MinWidth="0" Width="auto" Text="{Binding SelectedArt.artistDisplayName}"/>
                     <TextBlock MinWidth="0" Width="auto" Text="{Binding SelectedArt.artistNationality}"/>
                     <TextBlock MinWidth="0" Width="auto" Text="{Binding SelectedArt.objectDate}"/>
-                    
-                    <TextBlock MinWidth="0" Width="auto" Text="{Binding SelectedArt.objectDate}"/>
-                    <TextBlock Visibility="{Binding HasSelected}">
+                    <TextBlock Width="auto" Visibility="{Binding HasSelected}">
                         <Hyperlink Name="HL_wiki" NavigateUri="{Binding SelectedArt.objectURL}" Command="{Binding WebLinkCommand}">
                             <Run Text="Museum website link"/>
                         </Hyperlink>
