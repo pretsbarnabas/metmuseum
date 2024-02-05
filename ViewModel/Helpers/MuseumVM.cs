@@ -4,9 +4,11 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Navigation;
 
 namespace museum_api.ViewModel.Helpers
 {
@@ -14,6 +16,15 @@ namespace museum_api.ViewModel.Helpers
     {
         public event PropertyChangedEventHandler? PropertyChanged;
         public SearchCommand SearchCommand { get; set; }
+        public WebLink WebLinkCommand { get; set; }
+        private string hasselected;
+
+        public string HasSelected
+        {
+            get { return hasselected; }
+            set { hasselected = value; OnPropertyChanged(nameof(HasSelected)); }
+        }
+
         private Art selectedart;
         private int selectedItem;
 
@@ -66,6 +77,8 @@ namespace museum_api.ViewModel.Helpers
         public MuseumVM() 
         {
             SearchCommand = new SearchCommand(this);
+            WebLinkCommand = new WebLink(this);
+            hasselected = "Hidden";
             IdList = new();
         }
 
@@ -82,16 +95,20 @@ namespace museum_api.ViewModel.Helpers
                     IdList.Add(item);
                 }
             }
-            this.GetArtInfo();
         }
 
         private async void GetArtInfo()
         {
             SelectedArt = await API_Helper.GetArtInfo(SelectedItem);
+            HasSelected = "Visible";
         }
         private void OnPropertyChanged(string v)
         {
             PropertyChanged.Invoke(this, new PropertyChangedEventArgs(v));
+        }
+        public void Wiki_RequestNavigate()
+        {
+            Process.Start(new ProcessStartInfo(SelectedArt.objectURL) { UseShellExecute = true });
         }
     }
 }

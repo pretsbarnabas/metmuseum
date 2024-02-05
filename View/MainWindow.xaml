@@ -42,7 +42,12 @@
                     <TextBlock MinWidth="0" Width="auto" Text="{Binding SelectedArt.objectDate}"/>
                     
                     <TextBlock MinWidth="0" Width="auto" Text="{Binding SelectedArt.objectDate}"/>
-                    
+                    <TextBlock Visibility="{Binding HasSelected}">
+                        <Hyperlink Name="HL_wiki" NavigateUri="{Binding SelectedArt.objectURL}" Command="{Binding WebLinkCommand}">
+                            <Run Text="Museum website link"/>
+                        </Hyperlink>
+                    </TextBlock>
+
                 </StackPanel>
             </WrapPanel>
         </WrapPanel>
