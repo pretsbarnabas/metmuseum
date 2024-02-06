@@ -22,19 +22,24 @@
                     <Label FontStyle="Oblique" FontWeight="Bold" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Center">Metmuseum</Label>
                     <Label Foreground="Gray" VerticalAlignment="Bottom"> - böngéssz alkotások között!</Label>
                 </WrapPanel>
-                <TextBox Width="250" Text="{Binding Query, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBox Width="250" Text="{Binding Query, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    <TextBox.InputBindings>
+                        <KeyBinding Key="Enter" Command="{Binding SearchCommand}"/>
+                    </TextBox.InputBindings>
+                </TextBox>
                 <WrapPanel Width="250">
-                    <Button Margin="5" Width="100" Height="50" Content="Keresés" Command="{Binding SearchCommand}"/>
+                    <Button Margin="5" Width="100" Height="50" Content="Keresés" Command="{Binding SearchCommand}">
+                    </Button>
                     <Label VerticalContentAlignment="Center">Kiemelt alkotások:</Label>
                     <CheckBox IsChecked="{Binding CheckboxChecked}" IsEnabled="True" VerticalContentAlignment="Center" Margin="5" ></CheckBox>
                 </WrapPanel>
-                <!--<TextBlock MinWidth="0" Text="{Binding SelectedArt.objectName}"></TextBlock>-->
                 
                 <ListView Margin="10" MaxHeight="300" Width="200" Height="200" ItemsSource="{Binding IdList}" SelectedItem="{Binding SelectedItem}"/>
             </StackPanel>
             
             <WrapPanel Width="auto" MaxWidth="490">
                 <Image Margin="10" Width="150" Source="{Binding SelectedArt.primaryImage}"/>
+                <Image x:Name="noImage" Margin="10" Width="100" Source="placeholder.jpg" Visibility="{Binding NoImage}"/>
                 <StackPanel Width="auto" Margin="10">
                     <TextBlock FontStyle="Oblique" FontWeight="Bold" FontSize="15" MinWidth="0" Width="auto" Text="{Binding SelectedArt.title}"/>
                     <TextBlock FontStyle="Italic" MinWidth="0" Width="auto" Text="{Binding SelectedArt.artistDisplayName}"/>

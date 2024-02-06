@@ -38,5 +38,7 @@ namespace museum_api.ViewModel.Commands
         {
             VM.MakeQuery();
         }
+
+   
     }
 }

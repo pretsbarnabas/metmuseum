@@ -1,14 +1,8 @@
 ﻿using museum_api.Model;
 using museum_api.ViewModel.Commands;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Navigation;
 
 namespace museum_api.ViewModel.Helpers
 {
@@ -23,6 +17,14 @@ namespace museum_api.ViewModel.Helpers
         {
             get { return hasselected; }
             set { hasselected = value; OnPropertyChanged(nameof(HasSelected)); }
+        }
+
+        private string noImage;
+
+        public string NoImage
+        {
+            get { return noImage; }
+            set { noImage = value; OnPropertyChanged(nameof(noImage)); }
         }
 
         private Art selectedart;
@@ -80,6 +82,7 @@ namespace museum_api.ViewModel.Helpers
             SearchCommand = new SearchCommand(this);
             WebLinkCommand = new WebLink(this);
             hasselected = "Hidden";
+            noImage = "Hidden";
             IdList = new();
         }
 
@@ -102,7 +105,15 @@ namespace museum_api.ViewModel.Helpers
         private async void GetArtInfo()
         {
             SelectedArt = await API_Helper.GetArtInfo(SelectedItem);
-            if(string.IsNullOrEmpty(SelectedArt.primaryImage) && !string.IsNullOrEmpty(SelectedArt.primaryImageSmall)) SelectedArt.primaryImage = SelectedArt.primaryImageSmall;
+            NoImage = "Hidden";
+            if (string.IsNullOrEmpty(SelectedArt.primaryImage) && !string.IsNullOrEmpty(SelectedArt.primaryImageSmall))
+            {
+                SelectedArt.primaryImage = SelectedArt.primaryImageSmall;
+            }
+            else if (string.IsNullOrEmpty(SelectedArt.primaryImage))
+            {
+                NoImage = "Visible";
+            }
             HasSelected = "Visible";
         }
         private void OnPropertyChanged(string v)
