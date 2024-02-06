@@ -34,6 +34,7 @@ namespace museum_api.ViewModel.Helpers
             set {
                 selectedItem = value;
                 OnPropertyChanged(nameof(SelectedItem));
+                if (selectedItem == 0) return;
                 GetArtInfo();
             }
         }
@@ -95,11 +96,13 @@ namespace museum_api.ViewModel.Helpers
                     IdList.Add(item);
                 }
             }
+            SelectedItem = 0;
         }
 
         private async void GetArtInfo()
         {
             SelectedArt = await API_Helper.GetArtInfo(SelectedItem);
+            if(string.IsNullOrEmpty(SelectedArt.primaryImage) && !string.IsNullOrEmpty(SelectedArt.primaryImageSmall)) SelectedArt.primaryImage = SelectedArt.primaryImageSmall;
             HasSelected = "Visible";
         }
         private void OnPropertyChanged(string v)
